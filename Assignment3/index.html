@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="css/style.css">
+	<script src="js/assignment3.js"></script>
+	<title>Assignment 3</title>
+</head>
+
+<body>
+	<section class="form">
+		<div class="container">
+			<div class="form-wrapper">
+				<div class="form-container">
+					<form action="php/action.php" method="post" enctype="multipart/form-data" name="my-form"
+						onsubmit="return validateForm() ">
+						<label for="first_name">First Name</label>
+						<input type="text" id="first_name" name="first-name" placeholder="First name" oninput="updateFullname()">
+						<label for="last_name">Last Name</label>
+						<input type="text" id="last_name" name="last-name" placeholder="Last name" oninput="updateFullname()">
+						<label for="full_name">Full Name</label>
+						<input type="text" id="full_name" name="full-name" placeholder="Full Name" disabled>
+						<label for="image-file">Choose Image</label>
+						<input type="file" name="image-file" id="image-file">
+						<textarea name="marks-area" id="marks-area" cols="30" rows="10"></textarea>
+						<input type="submit" name="submit" value="Submit" class="submit-btn">
+					</form>
+				</div>
+			</div>
+
+		</div>
+
+	</section>
+
+</body>
+
+</html>
