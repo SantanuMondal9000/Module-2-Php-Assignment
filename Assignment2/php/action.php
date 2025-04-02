@@ -1,20 +1,27 @@
 <?php
-
+// Form Handling.
+    
 if (isset($_POST['submit'])) {
-    $fullname = $_POST['first-name'] . " " . $_POST['last-name'];
+    $fullName = $_POST['first-name'] . " " . $_POST['last-name'];
     $imagePath=imageUpload();
 }
+// Function Image Upload.
+
 function imageUpload(){
-    $target_dir = __DIR__ . "/../image/";
-    $target_file = $target_dir . basename($_FILES["image-file"]["name"]);
-    if (file_exists($target_file)) {
+    $targetDir = __DIR__ . "/../image/";
+    $targetFile = $targetDir . basename($_FILES["image-file"]["name"]);
+
+    if (file_exists($targetFile)) {
         return "../image/" . basename($_FILES["image-file"]["name"]);
+    } 
+    else {
+        if (move_uploaded_file($_FILES["image-file"]["tmp_name"], $targetFile)) {
+            return "../image/" . basename($_FILES["image-file"]["name"]);
+        } 
+        else {
+            return false;
+        }
     }
-    else{
-        move_uploaded_file($_FILES["image-file"]["tmp_name"], $target_file);
-        return "../image/" . basename($_FILES["image-file"]["name"]);
-    }
-    
 }
 ?>
 
@@ -26,7 +33,7 @@ function imageUpload(){
     <title>Assignment 1</title>
 </head>
 <body>
-    <h1>Hello <?php echo $fullname ?></h1>
+    <h1>Hello <?php echo $fullName ?></h1>
     <div class="image-container">
     <img src="<?php echo $imagePath; ?>" alt="image" width="500" height="500">
 
