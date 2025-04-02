@@ -1,6 +1,8 @@
 <?php
+    // Form Handling.
+    
     if (isset($_POST['submit'])) {
-        $fullname=$_POST['first-name'] ." ". $_POST['last-name'];
+        $fullName = $_POST['first-name'] . " " . $_POST['last-name'];
     }
 ?>
 <!DOCTYPE html>
@@ -11,7 +13,7 @@
     <title>Assignment 1</title>
 </head>
 <body>
-    <h1>Hello <?php echo $fullname ?></h1>
+    <h1>Hello <?php echo $fullName ?></h1>
 </body>
 </html>
 
