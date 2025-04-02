@@ -1,8 +1,8 @@
 <?php
-
-
+// Form Handling.
+    
 if (isset($_POST['submit'])) {
-    $fullname = $_POST['first-name'] . " " . $_POST['last-name'];
+    $fullName = $_POST['first-name'] . " " . $_POST['last-name'];
     $marks = trim($_POST['marks-area']);
     $imagePath = imageUpload();
     $phoneNumber.=$_POST['phone-number'];
@@ -13,16 +13,17 @@ if (isset($_POST['submit'])) {
     
 }
 
-// Function to handle file upload
-function imageUpload(){
-    $target_dir = __DIR__ . "/../image/";
-    $target_file = $target_dir . basename($_FILES["image-file"]["name"]);
+// Function to handle file upload.
 
-    if (file_exists($target_file)) {
+function imageUpload(){
+    $targetDir = __DIR__ . "/../image/";
+    $targetFile = $targetDir . basename($_FILES["image-file"]["name"]);
+
+    if (file_exists($targetFile)) {
         return "../image/" . basename($_FILES["image-file"]["name"]);
     } 
     else {
-        if (move_uploaded_file($_FILES["image-file"]["tmp_name"], $target_file)) {
+        if (move_uploaded_file($_FILES["image-file"]["tmp_name"], $targetFile)) {
             return "../image/" . basename($_FILES["image-file"]["name"]);
         } 
         else {
@@ -30,7 +31,8 @@ function imageUpload(){
         }
     }
 }
-//Function Phone Number Set
+//Function Phone Number Set.
+
 function phoneNumberSet(){
     global $phoneNumber;
     if(substr($phoneNumber,0,3)!="+91"){
@@ -39,7 +41,8 @@ function phoneNumberSet(){
         $phoneNumber.=$temp;
     }
 }
-//Function Validate Email
+//Function Validate Email.
+
 function emailValidate($email){
     $apiKey = "70bbcf56fcfa21dc46c561537c40877f";
     $url = "http://apilayer.net/api/check?access_key=$apiKey&email=$email";
@@ -79,7 +82,7 @@ function emailValidate($email){
 <body>
     <section class="content-part">
             
-        <h1>Hello <?php echo htmlspecialchars($fullname); ?></h1>
+        <h1>Hello <?php echo htmlspecialchars($fullName); ?></h1>
 
         <div class="image-container">
             <img src="<?php echo htmlspecialchars($imagePath); ?>" alt="image" width="500" height="500">
