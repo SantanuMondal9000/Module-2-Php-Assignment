@@ -1,10 +1,13 @@
-// Update the Full name
+// Update the Full name.
+
 function updateFullname() {
 	let firstName = document.getElementById("first_name").value;
 	let lastName = document.getElementById("last_name").value;
 	document.getElementById("full_name").value = firstName + " " + lastName;
 }
-// Validate Form
+
+// Validate Form.
+
 function validateForm() {
 	let firstName = document.forms["my-form"]["first-name"].value;
 	let lastName = document.forms["my-form"]["last-name"].value;
@@ -40,7 +43,7 @@ function validateForm() {
 		return false;
 	}
 	if (phoneNumber === "") {
-		alert("Phone Number Must be Filled!")
+		alert("Phone Number Must be Filled!");
 	}
 	if (phoneNumber.startsWith("+91")) {
 		phoneNumber = phoneNumber.slice(3);

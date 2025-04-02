@@ -1,31 +1,34 @@
 <?php
-
+// Form Handling.
+    
 if (isset($_POST['submit'])) {
-    $fullname = $_POST['first-name'] . " " . $_POST['last-name'];
+    $fullName = $_POST['first-name'] . " " . $_POST['last-name'];
     $marks = trim($_POST['marks-area']);
     $imagePath = imageUpload();
     $phoneNumber.=$_POST['phone-number'];
     phoneNumberSet();
     
 }
+// Function to handle file upload.
 
-// Function to handle file upload
 function imageUpload(){
-    $target_dir = __DIR__ . "/../image/";
-    $target_file = $target_dir . basename($_FILES["image-file"]["name"]);
+    $targetDir = __DIR__ . "/../image/";
+    $targetFile = $targetDir . basename($_FILES["image-file"]["name"]);
 
-    if (file_exists($target_file)) {
+    if (file_exists($targetFile)) {
         return "../image/" . basename($_FILES["image-file"]["name"]);
     } 
     else {
-        if (move_uploaded_file($_FILES["image-file"]["tmp_name"], $target_file)) {
-            return "../image/" . basename($_FILES["image-file"]["name"]);
-        } else {
-            return false;
-        }
+            if (move_uploaded_file($_FILES["image-file"]["tmp_name"], $targetFile)) {
+                return "../image/" . basename($_FILES["image-file"]["name"]);
+            } 
+            else {
+                return false;
+            }
     }
 }
-//Function Phone Number Set
+//Function Phone Number Set.
+
 function phoneNumberSet(){
     global $phoneNumber;
     if(substr($phoneNumber,0,3)=="+91"){
@@ -51,7 +54,7 @@ function phoneNumberSet(){
 <body>
     <section class="content-part">
             
-        <h1>Hello <?php echo htmlspecialchars($fullname); ?></h1>
+        <h1>Hello <?php echo htmlspecialchars($fullName); ?></h1>
 
         <div class="image-container">
             <img src="<?php echo htmlspecialchars($imagePath); ?>" alt="image" width="500" height="500">
