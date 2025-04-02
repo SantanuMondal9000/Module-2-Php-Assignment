@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="css/style.css">
+	<script src="js/assignment1.js"></script>
+	<title>Assignment 1</title>
+</head>
+
+<body>
+
+	<div class="form-container">
+		<form action="php/action.php" method="post" name="my-form" onsubmit="return validateForm()">
+			<label for="first_name">First Name</label>
+			<input type="text" id="first_name" name="first-name" placeholder="First name" oninput="updateFullname()">
+
+			<label for="last_name">Last Name</label>
+			<input type="text" id="last_name" name="last-name" placeholder="Last name" oninput="updateFullname()">
+
+			<label for="full_name">Full Name</label>
+			<input type="text" id="full_name" name="full-name" placeholder="Full Name" disabled>
+
+			<input type="submit" value="Submit" class="submit-btn" name="submit">
+		</form>
+	</div>
+
+</body>
+
+</html>
