@@ -1,0 +1,44 @@
+/* Reset */
+* {
+
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	font-family: Arial, sans-serif;
+}
+
+body {
+
+	background-color: #f4f4f4;
+}
+
+.container {
+	max-width: 1140px;
+	margin: 0 auto;
+}
+
+header {
+	padding: 30px;
+	background-color: #00215f;
+	text-align: right;
+}
+
+header a {
+	text-decoration: none;
+	display: inline-block;
+	padding: 15px 30px;
+	background-color: white;
+	border-radius: 10px;
+	color: black;
+	font-size: 1.3rem;
+}
+
+h1 {
+	text-align: center;
+	font-size: 6rem;
+	position: absolute;
+	left: 50%;
+	top: 40%;
+	transform: translate(-50%, -50%);
+	width: 70%;
+}
