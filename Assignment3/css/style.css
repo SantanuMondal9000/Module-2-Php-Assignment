@@ -129,6 +129,13 @@ tbody tr:hover {
 	transform: translateX(-50%);
 }
 
+.form-status {
+	color: red;
+	opacity: 0;
+	text-transform: uppercase 4 !important;
+
+}
+
 /* Responsive */
 @media (max-width: 400px) {
 	.form-container {
