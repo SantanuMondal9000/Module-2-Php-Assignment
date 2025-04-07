@@ -68,6 +68,13 @@ input:focus {
 	background: #0056b3;
 }
 
+.form-status {
+	color: red;
+	opacity: 0;
+	text-transform: uppercase 4 !important;
+
+}
+
 /* Responsive */
 @media (max-width: 400px) {
 	.form-container {
