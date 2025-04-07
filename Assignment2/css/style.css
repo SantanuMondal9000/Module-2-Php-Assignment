@@ -8,7 +8,6 @@
 }
 
 body {
-
 	background-color: #f4f4f4;
 }
 
@@ -17,8 +16,12 @@ body {
 	margin: 0 auto;
 }
 
-
 /* Form Design */
+h1 {
+	font-size: 4rem;
+	text-align: center;
+}
+
 
 .form-wrapper {
 	height: 100vh;
@@ -38,6 +41,12 @@ body {
 	transform: translate(-50%, -50%);
 }
 
+h1 {
+	font-size: 3rem;
+	text-align: center;
+	margin: 10px 0;
+}
+
 form {
 	display: flex;
 	flex-direction: column;
@@ -50,7 +59,9 @@ label {
 	color: #333;
 }
 
-input {
+input,
+textarea,
+.phone-number-block {
 	padding: 12px;
 	border: 1px solid #ccc;
 	border-radius: 5px;
@@ -59,11 +70,18 @@ input {
 	width: 100%;
 }
 
-input:focus {
+.image-container img {
+	max-width: 100%;
+	width: 100%;
+}
+
+input:focus,
+textarea:focus {
 	border-color: #007BFF;
 	outline: none;
 	box-shadow: 0px 0px 5px rgba(0, 123, 255, 0.5);
 }
+
 
 .submit-btn {
 	background: #007BFF;
@@ -79,6 +97,20 @@ input:focus {
 .submit-btn:hover {
 	background: #0056b3;
 }
+
+.form-status {
+	color: red;
+	opacity: 0;
+	text-transform: uppercase 4 !important;
+
+}
+
+.image-container {
+	width: 600px;
+	height: auto;
+	margin: 0 auto;
+}
+
 
 /* Responsive */
 @media (max-width: 400px) {
