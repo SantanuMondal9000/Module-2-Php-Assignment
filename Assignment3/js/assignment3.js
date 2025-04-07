@@ -60,14 +60,24 @@ function validateName(id) {
 // Function Image Valid.
 
 function imageValid(id) {
-
+	var fileInput = document.getElementById("image-file");
+	var filePath = fileInput.value;
+	var allowedExtensions = /(\.jpg|\.jpeg|\.png|\.gif)$/i;
 	if ($("#" + id).get(0).files.length === 0) {
 		formStatus("#" + id + "-status", "image must be select!.");
 		imageSelect = false;
-		console.log("hello");
-	} else {
+	}
+	else if (!allowedExtensions.test(filePath)) {
+		formStatus("#" + id + "-status", "File Type Should Be PNG, JPEG, JPG, or GIF!.");
+		fileInput.value = "";
+		imageSelect = false;
+	}
+	else {
+		hideStatus("#" + id + "-status");
 		imageSelect = true;
 	}
+
+
 }
 // Fucntion Validate Form Submit.
 
