@@ -32,7 +32,6 @@ function imageUpload(){
 function phoneNumberSet(){
     global $phoneNumber;
     if(substr($phoneNumber,0,3)=="+91"){
-        echo substr($phoneNumber,0,3);
     }
     else{
         $temp=$phoneNumber;

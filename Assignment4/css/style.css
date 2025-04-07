@@ -146,11 +146,17 @@ tbody tr:hover {
 	border: none;
 }
 
-.phone-number-block:focus {}
 
 .phone-number-block p {
 	font-size: 1.3rem;
 	padding: 3px;
+}
+
+.form-status {
+	color: red;
+	opacity: 0;
+	text-transform: uppercase 4 !important;
+
 }
 
 /* Responsive */
