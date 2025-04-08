@@ -1,3 +1,7 @@
+<?php
+include '../php/userPermission.php';
+include '../php/header.php';
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -11,7 +15,7 @@
 </head>
 
 <body>
-	<h1>Assignment 3</h1>
+	<h2>Assignment 3</h2>
 	<section class="form">
 		<div class="container">
 			<div class="form-wrapper">

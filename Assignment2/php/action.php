@@ -9,15 +9,17 @@ if (isset($_POST['submit'])) {
 
 function imageUpload()
 {
-    $targetDir = __DIR__ . "/../image/";
+    $targetDir = __DIR__ . "/../../image/";
     $targetFile = $targetDir . basename($_FILES["image-file"]["name"]);
+
     if (file_exists($targetFile)) {
-        return "../image/" . basename($_FILES["image-file"]["name"]);
+        return "../../image/" . basename($_FILES["image-file"]["name"]);
     } 
     else {
         if (move_uploaded_file($_FILES["image-file"]["tmp_name"], $targetFile)) {
-            return "../image/" . basename($_FILES["image-file"]["name"]);
-        } else {
+            return "../../image/" . basename($_FILES["image-file"]["name"]);
+        } 
+        else {
             return false;
         }
     }

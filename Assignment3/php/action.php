@@ -10,16 +10,17 @@ if (isset($_POST['submit'])) {
 
 // Function to handle file upload
 
-function imageUpload(){
-    $targetDir = __DIR__ . "/../image/";
+function imageUpload()
+{
+    $targetDir = __DIR__ . "/../../image/";
     $targetFile = $targetDir . basename($_FILES["image-file"]["name"]);
 
     if (file_exists($targetFile)) {
-        return "../image/" . basename($_FILES["image-file"]["name"]);
+        return "../../image/" . basename($_FILES["image-file"]["name"]);
     } 
     else {
         if (move_uploaded_file($_FILES["image-file"]["tmp_name"], $targetFile)) {
-            return "../image/" . basename($_FILES["image-file"]["name"]);
+            return "../../image/" . basename($_FILES["image-file"]["name"]);
         } 
         else {
             return false;
@@ -45,32 +46,33 @@ function imageUpload(){
         <div class="image-container">
             <img src="<?php echo htmlspecialchars($imagePath); ?>" alt="image" width="500" height="500">
         </div>
-
-        <table>
-            <thead>
-                <tr>
-                    <th>Subject</th>
-                    <th>Marks</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php 
-                $marksLine = explode("\n", $marks);
-                foreach ($marksLine as $line) {
-                    $marksPart = explode("|", $line);
-
-                    if (count($marksPart) == 2) {
-                        ?>
-                        <tr>
-                            <td><?= htmlspecialchars(trim($marksPart[0])); ?></td>
-                            <td><?= htmlspecialchars(trim($marksPart[1])); ?></td>
-                        </tr>
-                        <?php
-                    }
+        <?php if (!empty($marks)) { ?>
+    <table>
+        <thead>
+            <tr>
+                <th>Subject</th>
+                <th>Marks</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php 
+            $marksLine = explode("\n", $marks);
+            foreach ($marksLine as $line) {
+                $marksPart = explode("|", $line);
+                if (count($marksPart) == 2) {
+                    ?>
+                    <tr>
+                        <td><?= htmlspecialchars(trim($marksPart[0])); ?></td>
+                        <td><?= htmlspecialchars(trim($marksPart[1])); ?></td>
+                    </tr>
+                    <?php
                 }
-                ?>
-            </tbody>
-        </table>
+            }
+            ?>
+        </tbody>
+    </table>
+<?php } ?>
+        
     </section>
 </body>
 </html>

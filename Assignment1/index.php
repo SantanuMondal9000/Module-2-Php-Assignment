@@ -1,3 +1,8 @@
+<?php
+include '../php/userPermission.php';
+include '../php/header.php';
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -11,7 +16,7 @@
 </head>
 
 <body>
-
+	<h1>Assignment 1</h1>
 	<div class="form-container">
 		<form action="php/action.php" method="post" name="my-form" onsubmit="return formSubmit()">
 			<label for="first_name">First Name</label>

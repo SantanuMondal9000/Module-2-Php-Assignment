@@ -5,7 +5,7 @@ use PhpOffice\PhpWord\PhpWord;
 use Exception;
 // Form Handling.
     
-if (isset($_POST['submit'])) {
+if (isset($_POST['email'])) {
     $fullName = $_POST['first-name'] . " " . $_POST['last-name'];
     $marks = trim($_POST['marks-area']);
     $imagePath = imageUpload();
@@ -24,15 +24,15 @@ if (isset($_POST['submit'])) {
 
 function imageUpload()
 {
-    $targetDir = __DIR__ . "/../image/";
+    $targetDir = __DIR__ . "/../../image/";
     $targetFile = $targetDir . basename($_FILES["image-file"]["name"]);
 
     if (file_exists($targetFile)) {
-        return "../image/" . basename($_FILES["image-file"]["name"]);
+        return "../../image/" . basename($_FILES["image-file"]["name"]);
     } 
     else {
         if (move_uploaded_file($_FILES["image-file"]["tmp_name"], $targetFile)) {
-            return "../image/" . basename($_FILES["image-file"]["name"]);
+            return "../../image/" . basename($_FILES["image-file"]["name"]);
         } 
         else {
             return false;
@@ -172,30 +172,32 @@ function generateDocument($fullName, $imagePath, $phoneNumber, $email)
             <img src="<?php echo htmlspecialchars($imagePath); ?>" alt="image" width="500" height="500">
         </div>
 
-        <table>
-            <thead>
-                <tr>
-                    <th>Subject</th>
-                    <th>Marks</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php
-                foreach ($marksLine as $line) {
-                    $marksPart = explode("|", $line);
-
-                    if (count($marksPart) == 2) {
-                ?>
-                        <tr>
-                            <td><?= htmlspecialchars(trim($marksPart[0])); ?></td>
-                            <td><?= htmlspecialchars(trim($marksPart[1])); ?></td>
-                        </tr>
-                <?php
-                    }
+        <?php if (!empty($marks)) { ?>
+    <table>
+        <thead>
+            <tr>
+                <th>Subject</th>
+                <th>Marks</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php 
+            $marksLine = explode("\n", $marks);
+            foreach ($marksLine as $line) {
+                $marksPart = explode("|", $line);
+                if (count($marksPart) == 2) {
+                    ?>
+                    <tr>
+                        <td><?= htmlspecialchars(trim($marksPart[0])); ?></td>
+                        <td><?= htmlspecialchars(trim($marksPart[1])); ?></td>
+                    </tr>
+                    <?php
                 }
-                ?>
-            </tbody>
-        </table>
+            }
+            ?>
+        </tbody>
+    </table>
+<?php } ?>
         <h1>Phone Number: <?= $phoneNumber ?></h1>
         <h1>Email: <?= $emailNotValid == "" ? $email : $emailNotValid ?></h1>
         <a href="<?php echo $filePath ?>">Download Form Doc File</a>

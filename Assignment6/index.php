@@ -1,3 +1,7 @@
+<?php
+include '../php/userPermission.php';
+include '../php/header.php';
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -6,17 +10,17 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<link rel="stylesheet" href="css/style.css">
-	<script src="js/assignment5.js"></script>
-	<title>Assignment 5</title>
+	<script src="js/assignment6.js"></script>
+	<title>Assignment 6</title>
 </head>
 
 <body>
-	<h1>Assignment 5</h1>
+	<h2>Assignment 6</h2>
 	<section class="form">
 		<div class="container">
 			<div class="form-wrapper">
 				<div class="form-container">
-					<form action="php/action.php" method="post" name="my-form" onsubmit="return formSubmit()"
+					<form action="php/action.php" method="post" id="my-form" name="my-form" onsubmit="return formSubmit(event);"
 						enctype="multipart/form-data">
 						<label for="first_name">First Name</label>
 						<input type="text" id="first_name" name="first-name" placeholder="First name"
@@ -43,7 +47,7 @@
 						<label for="image-file">Email</label>
 						<input type="text" name="email" id="email">
 						<p class="form-status" id="email-status">hello</p>
-						<input type="submit" name="submit" value="Submit" class="submit-btn">
+						<input type="submit" name="submit" value="Submit" class="submit-btn" id="submit-btn">
 					</form>
 				</div>
 			</div>

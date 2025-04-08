@@ -1,7 +1,7 @@
 <?php
 // Form Handling.
     
-if (isset($_POST['submit'])) {
+if (isset($_POST['email'])) {
     $fullName = $_POST['first-name'] . " " . $_POST['last-name'];
     $marks = trim($_POST['marks-area']);
     $imagePath = imageUpload();
@@ -9,22 +9,23 @@ if (isset($_POST['submit'])) {
     $email=$_POST['email'];
     $emailNotValid="";
     phoneNumberSet();
-    emailValidate($email);
+    //emailValidate($email);
     
 }
 
 // Function to handle file upload.
 
-function imageUpload(){
-    $targetDir = __DIR__ . "/../image/";
+function imageUpload()
+{
+    $targetDir = __DIR__ . "/../../image/";
     $targetFile = $targetDir . basename($_FILES["image-file"]["name"]);
 
     if (file_exists($targetFile)) {
-        return "../image/" . basename($_FILES["image-file"]["name"]);
+        return "../../image/" . basename($_FILES["image-file"]["name"]);
     } 
     else {
         if (move_uploaded_file($_FILES["image-file"]["tmp_name"], $targetFile)) {
-            return "../image/" . basename($_FILES["image-file"]["name"]);
+            return "../../image/" . basename($_FILES["image-file"]["name"]);
         } 
         else {
             return false;
@@ -41,33 +42,8 @@ function phoneNumberSet(){
         $phoneNumber.=$temp;
     }
 }
-//Function Validate Email.
 
-function emailValidate($email){
-    $apiKey = "70bbcf56fcfa21dc46c561537c40877f";
-    $url = "http://apilayer.net/api/check?access_key=$apiKey&email=$email";
-    try {
-        $ch = curl_init($url);
-        if ($ch === false) {
-            throw new Exception("Failed to initialize cURL session.");
-        }
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        $response = curl_exec($ch);
 
-        if ($response === false) {
-            throw new Exception("cURL request failed: " . curl_error($ch));
-        }
-        curl_close($ch);
-        $data = json_decode($response, true);
-        if (isset($data['smtp_check']) && $data['smtp_check'] != true) {
-            global $emailNotValid;
-            $emailNotValid.="Email Not Valid!";
-        } 
-    } 
-    catch (Exception $e) {
-        echo "Error: " . $e->getMessage();
-    }
-}
 
 
 ?>
@@ -87,32 +63,32 @@ function emailValidate($email){
         <div class="image-container">
             <img src="<?php echo htmlspecialchars($imagePath); ?>" alt="image" width="500" height="500">
         </div>
-
-        <table>
-            <thead>
-                <tr>
-                    <th>Subject</th>
-                    <th>Marks</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php 
-                $marksLine = explode("\n", $marks);
-                foreach ($marksLine as $line) {
-                    $marksPart = explode("|", $line);
-
-                    if (count($marksPart) == 2) {
-                        ?>
-                        <tr>
-                            <td><?= htmlspecialchars(trim($marksPart[0])); ?></td>
-                            <td><?= htmlspecialchars(trim($marksPart[1])); ?></td>
-                        </tr>
-                        <?php
-                    }
+        <?php if (!empty($marks)) { ?>
+    <table>
+        <thead>
+            <tr>
+                <th>Subject</th>
+                <th>Marks</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php 
+            $marksLine = explode("\n", $marks);
+            foreach ($marksLine as $line) {
+                $marksPart = explode("|", $line);
+                if (count($marksPart) == 2) {
+                    ?>
+                    <tr>
+                        <td><?= htmlspecialchars(trim($marksPart[0])); ?></td>
+                        <td><?= htmlspecialchars(trim($marksPart[1])); ?></td>
+                    </tr>
+                    <?php
                 }
-                ?>
-            </tbody>
-        </table>
+            }
+            ?>
+        </tbody>
+    </table>
+<?php } ?>
         <h1>Phone Number: <?= $phoneNumber ?></h1>
         <h1>Email: <?= $emailNotValid == "" ? $email: $emailNotValid ?></h1>
     </section>

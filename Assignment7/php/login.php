@@ -10,7 +10,14 @@ if (isset($_POST['formData'])) {
   
   if ($dataUser['username'] == $USERNAME && $dataUser['password'] == $PASSWORD) {
     $_SESSION['username'] = $dataUser['username'];
+  
     echo json_encode(["status" => true]);
+    session_set_cookie_params([
+      'lifetime' => 0,
+      'secure' => true,    
+      'httponly' => true,     
+      'samesite' => 'Strict',
+  ]);
 } 
 else {
     echo json_encode(["status" => false]);

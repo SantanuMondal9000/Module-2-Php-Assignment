@@ -5,6 +5,7 @@ var lastNameValid = false;
 var nameLength = 30;
 var imageSelect = false;
 var phoneNumberValid = false;
+var emailValidSyntax = false;
 var emailValid = false;
 
 // Update the Full name.
@@ -119,34 +120,65 @@ function validatePhone(id) {
 // Function Valid Email.
 
 function validEmail(id) {
-	let email = $("#" + id).val().trim();  // ✅ Get email input
-	let emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+	return new Promise(function (resolve, reject) {
+		let email = $("#" + id).val().trim();
+		let emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
-	if (!emailPattern.test(email)) {
-		formStatus("#" + id + "-status", "Invalid email address!");
-		emailValid = false;
-	} else {
-		hideStatus("#" + id + "-status");
-		emailValid = true;
-	}
+		if (!emailPattern.test(email)) {
+			formStatus("#" + id + "-status", "Invalid Syntax !");
+			resolve(false);
+		} else {
+			hideStatus("#" + id + "-status");
+
+			$.ajax({
+				url: "./php/emailValidator.php",
+				type: "POST",
+				data: { email: email },
+				dataType: "json",
+				success: function (response) {
+					console.log("Server check:", response);
+					if (response === true) {
+						resolve(true);
+					} else {
+						formStatus("#" + id + "-status", "Invalid email address!");
+						resolve(false);
+					}
+				},
+				error: function (xhr, status, error) {
+					console.log("AJAX Error: " + status + " - " + error);
+					resolve(false);
+				}
+			});
+		}
+	});
 }
+
 
 // Fucntion Validate Form Submit.
 
-function formSubmit() {
+async function formSubmit(event) {
+	if (event) event.preventDefault();
+
 	validateName("first-name");
 	validateName("last-name");
 	imageValid("image-file");
 	validatePhone("phone-number");
-	validEmail("email")
-	console.log(emailValid);
-	if (firstNameValid && lastNameValid && imageSelect && phoneNumberValid && emailValid) {
-		return true;
-	}
-	else {
-		return false;
+
+	let emailCheck = await validEmail("email");
+
+	if (firstNameValid && lastNameValid && imageSelect && phoneNumberValid && emailCheck) {
+		console.log("✅ All validations passed");
+
+		const form = document.getElementById("my-form");
+		const submitInput = form.querySelector('[name="submit"]');
+		if (submitInput) {
+			submitInput.removeAttribute("name");
+		}
+		form.submit();
 	}
 }
+
+
 
 // Function Form Status.
 
@@ -157,6 +189,7 @@ function formStatus(id, message) {
 
 	});
 }
+
 
 // Function Hide Status.
 
