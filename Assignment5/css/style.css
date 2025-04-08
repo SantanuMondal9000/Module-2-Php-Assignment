@@ -34,9 +34,9 @@ body {
 	width: 500px;
 	margin: 0 auto;
 	position: absolute;
-	top: 50%;
 	left: 50%;
-	transform: translate(-50%, -50%);
+	transform: translateX(-50%);
+
 }
 
 h1 {
@@ -127,6 +127,7 @@ tbody tr:hover {
 	max-width: 50%;
 	position: absolute;
 	left: 50%;
+	top: 50%;
 	transform: translateX(-50%);
 	text-align: center;
 }
@@ -146,7 +147,12 @@ tbody tr:hover {
 	border: none;
 }
 
-.phone-number-block:focus {}
+.form-status {
+	color: red;
+	opacity: 0;
+	text-transform: uppercase 4 !important;
+
+}
 
 .phone-number-block p {
 	font-size: 1.3rem;
