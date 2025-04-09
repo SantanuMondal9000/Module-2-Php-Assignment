@@ -25,16 +25,16 @@ include '../php/header.php';
 						<label for="first_name">First Name</label>
 						<input type="text" id="first_name" name="first-name" placeholder="First name"
 							oninput="validateName('first-name')">
-						<p class="form-status" id="first-name-status">hello</p>
+						<p class="form-status" id="first-name-status">&nbsp;</p>
 						<label for="last_name">Last Name</label>
 						<input type="text" id="last_name" name="last-name" placeholder="Last name"
 							oninput="validateName('last-name')">
-						<p class="form-status" id="last-name-status">hello</p>
+						<p class="form-status" id="last-name-status">&nbsp;</p>
 						<label for="full_name">Full Name</label>
 						<input type="text" id="full_name" name="full-name" placeholder="Full Name" disabled>
 						<label for="image-file">Choose Image</label>
 						<input type="file" name="image-file" id="image-file" onchange="imageValid('image-file')">
-						<p class="form-status" id="image-file-status">hello</p>
+						<p class="form-status" id="image-file-status">&nbsp;</p>
 						<input type="submit" name="submit" value="Submit" class="submit-btn">
 					</form>
 				</div>

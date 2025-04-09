@@ -6,6 +6,7 @@ var nameLength = 30;
 var imageSelect = false;
 var phoneNumberValid = false;
 var emailValid = false;
+var marksValidation = false;
 
 // Update the Full name.
 
@@ -129,9 +130,10 @@ function validEmail(id) {
 			resolve(false);
 		} else {
 			hideStatus("#" + id + "-status");
+			$("#loading").show();
 
 			$.ajax({
-				url: "http://mywebsite.local/Assignment5/php/emailValidator.php",
+				url: "../../Assignment5/php/emailValidator.php",
 				type: "POST",
 				data: { email: email },
 				dataType: "json",
@@ -139,18 +141,69 @@ function validEmail(id) {
 					console.log("Server check:", response);
 					if (response === true) {
 						resolve(true);
+						$("#loading").hide();
 					} else {
 						formStatus("#" + id + "-status", "Invalid email address!");
 						resolve(false);
+						$("#loading").hide();
 					}
 				},
 				error: function (xhr, status, error) {
 					console.log("AJAX Error: " + status + " - " + error);
+					formStatus("#" + id + "-status", "Failed!");
+					$("#loading").hide();
 					resolve(false);
 				}
 			});
 		}
 	});
+}
+
+
+// Function Marks Valid. 
+function marksValid(id) {
+	let input = document.getElementById(id).value.trim();
+	let lines = input.split('\n');
+
+	const pattern = /^[A-Za-z]+(?: [A-Za-z]+)*\|(100|[1-9][0-9]?|0)$/;
+
+	let isValid = true;
+	let errorMsg = '';
+	let cleanedLines = [];
+
+	for (let i = 0; i < lines.length; i++) {
+		let line = lines[i].trim();
+
+		if (line === '') continue;
+
+		if (!line.includes('|')) {
+			isValid = false;
+			errorMsg += `Line ${i + 1} missing "|": "${lines[i]}"\n`;
+			continue;
+		}
+		let [subjectRaw, marksRaw] = line.split('|');
+
+		let subject = subjectRaw.trim().replace(/\s+/g, ' ');
+		let marks = marksRaw.trim();
+
+		let cleanedLine = `${subject}|${marks}`;
+
+		if (!pattern.test(cleanedLine)) {
+			isValid = false;
+			errorMsg += `Line ${i + 1} is invalid format \n`;
+		} else {
+			cleanedLines.push(cleanedLine);
+		}
+	}
+
+	if (input === "") {
+		formStatus("#" + id + "-status", "Marks to be filled!");
+	} else if (isValid) {
+		document.getElementById(id).value = cleanedLines.join('\n');
+		marksValidation = true;
+	} else {
+		formStatus("#" + id + "-status", errorMsg);
+	}
 }
 
 // Fucntion Validate Form Submit.
@@ -161,13 +214,12 @@ async function formSubmit(event) {
 	validateName("first-name");
 	validateName("last-name");
 	imageValid("image-file");
+	marksValid("marks-area");
 	validatePhone("phone-number");
-
 	let emailCheck = await validEmail("email");
 
 
-	if (firstNameValid && lastNameValid && imageSelect && phoneNumberValid && emailCheck) {
-		console.log("✅ All validations passed");
+	if (firstNameValid && lastNameValid && imageSelect && marksValidation && phoneNumberValid && emailCheck) {
 
 		const form = document.getElementById("my-form");
 		const submitInput = form.querySelector('[name="submit"]');

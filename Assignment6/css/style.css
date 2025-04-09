@@ -139,7 +139,7 @@ tbody tr:hover {
 	max-width: 50%;
 	position: absolute;
 	left: 50%;
-	top: 50%;
+	top: 60%;
 	transform: translate(-50%, -50%);
 	text-align: center;
 }
@@ -170,6 +170,34 @@ tbody tr:hover {
 	font-size: 1.3rem;
 	padding: 3px;
 }
+
+.loading {
+
+	text-align: center;
+	margin: 0 auto;
+	position: relative;
+	display: none;
+}
+
+.loading img {
+	width: 100%;
+	height: auto;
+	margin: 0 auto;
+}
+
+.loading::before {
+	content: "";
+	position: absolute;
+	background-image: url("../../asset/Animation\ -\ 1743753148782.gif");
+	background-size: cover;
+	background-position: center;
+	width: 100px;
+	height: 100px;
+	bottom: -30px;
+	left: 50%;
+	transform: translateX(-50%);
+}
+
 
 /* Responsive */
 @media (max-width: 400px) {

@@ -1,5 +1,7 @@
 <?php
 require '../../vendor/autoload.php';
+include '../../php/userPermission.php';
+include '../../php/header.php';
 
 use PhpOffice\PhpWord\PhpWord;
 use Exception;
@@ -61,7 +63,7 @@ function phoneNumberSet()
 
 function emailValidate($email)
 {
-    $apiKey = "70bbcf56fcfa21dc46c561537c40877f";
+    $apiKey = "70bbcf56fcfa21dc46c561537c40877";
     $url = "http://apilayer.net/api/check?access_key=$apiKey&email=$email";
     try {
         $ch = curl_init($url);
@@ -159,6 +161,7 @@ function generateDocument($fullName, $imagePath, $phoneNumber, $email)
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../css/style.css">
     <link rel="stylesheet" href="../css/style.css">
     <title>Document</title>
 </head>

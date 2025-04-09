@@ -4,6 +4,7 @@ var firstNameValid = false;
 var lastNameValid = false;
 var nameLength = 30;
 var imageSelect = false;
+var marksValidation = false;
 var phoneNumberValid = false;
 
 // Update the Full name.
@@ -115,16 +116,64 @@ function validatePhone(id) {
 		}
 	}
 }
+
+// Function Marks Valid. 
+function marksValid(id) {
+	let input = document.getElementById(id).value.trim();
+	let lines = input.split('\n');
+
+	const pattern = /^[A-Za-z]+(?: [A-Za-z]+)*\|(100|[1-9][0-9]?|0)$/;
+
+	let isValid = true;
+	let errorMsg = '';
+	let cleanedLines = [];
+
+	for (let i = 0; i < lines.length; i++) {
+		let line = lines[i].trim();
+
+		if (line === '') continue;
+
+		if (!line.includes('|')) {
+			isValid = false;
+			errorMsg += `Line ${i + 1} missing "|": "${lines[i]}"\n`;
+			continue;
+		}
+		let [subjectRaw, marksRaw] = line.split('|');
+
+		let subject = subjectRaw.trim().replace(/\s+/g, ' ');
+		let marks = marksRaw.trim();
+
+		let cleanedLine = `${subject}|${marks}`;
+
+		if (!pattern.test(cleanedLine)) {
+			isValid = false;
+			errorMsg += `Line ${i + 1} is invalid format \n`;
+		} else {
+			cleanedLines.push(cleanedLine);
+		}
+	}
+
+	if (input === "") {
+		formStatus("#" + id + "-status", "Marks to be filled!");
+	} else if (isValid) {
+		document.getElementById(id).value = cleanedLines.join('\n');
+		marksValidation = true;
+	} else {
+		formStatus("#" + id + "-status", errorMsg);
+	}
+}
+
 // Fucntion Validate Form Submit.
 
 function formSubmit() {
 	validateName("first-name");
 	validateName("last-name");
 	imageValid("image-file");
+	marksValid("marks-area");
 	validatePhone("phone-number");
 	console.log(phoneNumberValid);
-	if (firstNameValid && lastNameValid && imageSelect && phoneNumberValid) {
-		return true;
+	if (firstNameValid && lastNameValid && imageSelect && marksValidation && phoneNumberValid) {
+		//return true;
 	}
 	else {
 		return false;

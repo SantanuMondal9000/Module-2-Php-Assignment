@@ -17,7 +17,7 @@ $(document).ready(function () {
 			success: function (response) {
 				console.log(JSON.stringify(response));
 				if (response.status) {
-					window.location.href = "http://mywebsite.local/Assignment4/index.php";
+					window.location.href = "../../Assignment4/index.php";
 					console.log("hello");
 				} else {
 					console.log("Login Failed");

@@ -14,10 +14,14 @@ body {
 
 
 /* Form Design */
-h1 {
+h2 {
+	font-size: 3rem;
 	text-align: center;
 	position: absolute;
 	top: 20%;
+	left: 50%;
+	transform: translateX(-50%);
+	margin: 10px 0;
 	font-size: 3rem;
 }
 

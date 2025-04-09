@@ -16,17 +16,17 @@ include '../php/header.php';
 </head>
 
 <body>
-	<h1>Assignment 1</h1>
+	<h2>Assignment 1</h2>
 	<div class="form-container">
 		<form action="php/action.php" method="post" name="my-form" onsubmit="return formSubmit()">
 			<label for="first_name">First Name</label>
 			<input type="text" id="first_name" name="first-name" placeholder="First name"
 				oninput="validateForm('first-name')">
-			<p class="form-status" id="first-name-status">hello</p>
+			<p class="form-status" id="first-name-status">&nbsp;</p>
 
 			<label for="last_name">Last Name</label>
 			<input type="text" id="last_name" name="last-name" placeholder="Last name" oninput="validateForm('last-name')">
-			<p class="form-status" id="last-name-status">hello</p>
+			<p class="form-status" id="last-name-status">&nbsp;</p>
 
 			<label for="full_name">Full Name</label>
 			<input type="text" id="full_name" name="full-name" placeholder="Full Name" disabled>

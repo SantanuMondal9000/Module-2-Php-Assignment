@@ -25,28 +25,32 @@ include '../php/header.php';
 						<label for="first_name">First Name</label>
 						<input type="text" id="first_name" name="first-name" placeholder="First name"
 							oninput="validateName('first-name')">
-						<p class="form-status" id="first-name-status">hello</p>
+						<p class="form-status" id="first-name-status">&nbsp;</p>
 						<label for="last_name">Last Name</label>
 						<input type="text" id="last_name" name="last-name" placeholder="Last name"
 							oninput="validateName('last-name')">
-						<p class="form-status" id="last-name-status">hello</p>
+						<p class="form-status" id="last-name-status">&nbsp;</p>
 						<label for="full_name">Full Name</label>
 						<input type="text" id="full_name" name="full-name" placeholder="Full Name" disabled>
 						<label for="image-file">Choose Image</label>
 						<input type="file" name="image-file" id="image-file" onchange="imageValid('image-file')">
-						<p class="form-status" id="image-file-status">hello</p>
-						<textarea name="marks-area" id="marks-area" cols="30" rows="10"></textarea>
+						<p class="form-status" id="image-file-status">&nbsp;</p>
+						<textarea name="marks-area" id="marks-area" cols="30" rows="10" placeholder="English | 70&#10;Bengali | 90"oninput="hideStatus('#marks-area-status')"></textarea>
+						<p class="form-status" id="marks-area-status">&nbsp;</p>
 						<label for="phone-number">Phone Number</label>
 						<div class="phone-number-block">
 							<div class="phone-prefix">
 								<p>+91</p>
 							</div>
-							<input type="text" name="phone-number" id="phone-number">
+							<input type="text" name="phone-number" id="phone-number" oninput="hideStatus('#phone-number-status')">
 						</div>
 						<p class="form-status" id="phone-number-status">hello</p>
 						<label for="image-file">Email</label>
-						<input type="text" name="email" id="email">
-						<p class="form-status" id="email-status">hello</p>
+						<input type="text" name="email" id="email" oninput="hideStatus('#email-status')">
+						<p class="form-status" id="email-status">&nbsp;</p>
+						<div id="loading" class="loading">
+						&nbsp;
+					</div>
 						<input type="submit" name="submit" value="Submit" class="submit-btn" id="submit-btn">
 					</form>
 				</div>

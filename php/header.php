@@ -15,7 +15,7 @@ session_start();
   <header>
     <div class="container">
       <?php if (isset($_SESSION['username'])) { ?>
-        <a href="http://mywebsite.local/php/logout.php">Logout</a>
+        <a href="../../php/logout.php">Logout</a>
       <?php } else { ?>
         <a href="Assignment7/login.html">Login</a>
       <?php } ?>
