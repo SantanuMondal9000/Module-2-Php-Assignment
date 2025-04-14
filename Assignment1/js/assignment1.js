@@ -1,4 +1,5 @@
 // Variable.
+
 var firstNameValid = false;
 var lastNameValid = false;
 var nameLength = 30;
@@ -54,9 +55,7 @@ function validateForm(id) {
 			lastNameValid = true;
 		}
 	}
-
 }
-
 // Fucntion Validate Form Submit.
 
 function formSubmit() {
@@ -69,17 +68,14 @@ function formSubmit() {
 		return false;
 	}
 }
-
 // Function Form Status.
 
 function formStatus(id, message) {
 	$(id).text(message).css({
 		"opacity": "1",
 		"text-transform": "capitalize"
-
 	});
 }
-
 // Function Hide Status.
 
 function hideStatus(id) {
@@ -87,4 +83,3 @@ function hideStatus(id) {
 		"opacity": "0"
 	});
 }
-

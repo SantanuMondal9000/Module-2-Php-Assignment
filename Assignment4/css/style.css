@@ -109,7 +109,7 @@ textarea:focus {
 }
 
 table {
-	width: 100%;
+	width: 60%;
 	border-collapse: collapse;
 	margin: 20px 0;
 	font-size: 18px;
@@ -117,6 +117,7 @@ table {
 	border-radius: 10px;
 	overflow: hidden;
 	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+	margin: 0 auto;
 }
 
 thead {
@@ -136,7 +137,7 @@ tbody tr:hover {
 
 
 .content-part {
-	max-width: 50%;
+	width: 60%;
 	position: absolute;
 	left: 50%;
 	transform: translateX(-50%);
@@ -156,6 +157,10 @@ tbody tr:hover {
 
 .phone-number-block input {
 	border: none;
+}
+
+.phone-number {
+	font-size: 3rem;
 }
 
 

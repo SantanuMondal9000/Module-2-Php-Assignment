@@ -1,4 +1,5 @@
 // Variable.
+
 var firstNameValid = false;
 var lastNameValid = false;
 var nameLength = 30;
@@ -12,7 +13,6 @@ function updateFullname() {
 	let lastName = document.getElementById("last_name").value;
 	document.getElementById("full_name").value = firstName + " " + lastName;
 }
-
 // Validate Form.
 
 function validateName(id) {
@@ -28,7 +28,6 @@ function validateName(id) {
 		else if (!namePattern.test(firstName)) {
 			formStatus("#" + id + "-status", "first name must contain only alphabets.");
 			firstNameValid = false;
-
 		}
 		else if (firstName.length >= nameLength) {
 			formStatus("#" + id + "-status", "first name must below " + nameLength + " characters!");
@@ -77,57 +76,49 @@ function imageValid(id) {
 		hideStatus("#" + id + "-status");
 		imageSelect = true;
 	}
-
-
 }
-
 // Function Marks Valid. 
+
 function marksValid(id) {
 	let input = document.getElementById(id).value.trim();
 	let lines = input.split('\n');
-
 	const pattern = /^[A-Za-z]+(?: [A-Za-z]+)*\|(100|[1-9][0-9]?|0)$/;
-
 	let isValid = true;
 	let errorMsg = '';
 	let cleanedLines = [];
 
 	for (let i = 0; i < lines.length; i++) {
 		let line = lines[i].trim();
-
 		if (line === '') continue;
-
 		if (!line.includes('|')) {
 			isValid = false;
 			errorMsg += `Line ${i + 1} missing "|": "${lines[i]}"\n`;
 			continue;
 		}
 		let [subjectRaw, marksRaw] = line.split('|');
-
 		let subject = subjectRaw.trim().replace(/\s+/g, ' ');
 		let marks = marksRaw.trim();
-
 		let cleanedLine = `${subject}|${marks}`;
 
 		if (!pattern.test(cleanedLine)) {
 			isValid = false;
 			errorMsg += `Line ${i + 1} is invalid format \n`;
-		} else {
+		}
+		else {
 			cleanedLines.push(cleanedLine);
 		}
 	}
-
 	if (input === "") {
 		formStatus("#" + id + "-status", "Marks to be filled!");
-	} else if (isValid) {
+	}
+	else if (isValid) {
 		document.getElementById(id).value = cleanedLines.join('\n');
 		marksValidation = true;
-	} else {
+	}
+	else {
 		formStatus("#" + id + "-status", errorMsg);
 	}
 }
-
-
 // Fucntion Validate Form Submit.
 
 function formSubmit() {
@@ -142,7 +133,6 @@ function formSubmit() {
 		return false;
 	}
 }
-
 // Function Form Status.
 
 function formStatus(id, message) {
@@ -152,7 +142,6 @@ function formStatus(id, message) {
 
 	});
 }
-
 // Function Hide Status.
 
 function hideStatus(id) {
@@ -160,4 +149,3 @@ function hideStatus(id) {
 		"opacity": "0"
 	});
 }
-

@@ -1,5 +1,6 @@
 
 // Variable.
+
 var firstNameValid = false;
 var lastNameValid = false;
 var nameLength = 30;
@@ -17,7 +18,6 @@ function updateFullname() {
 	document.getElementById("full_name").value = firstName + " " + lastName;
 
 }
-
 // Validate Form.
 
 function validateName(id) {
@@ -128,7 +128,8 @@ function validEmail(id) {
 		if (!emailPattern.test(email)) {
 			formStatus("#" + id + "-status", "Invalid Syntax !");
 			resolve(false);
-		} else {
+		}
+		else {
 			hideStatus("#" + id + "-status");
 			$("#loading").show();
 			$.ajax({
@@ -141,7 +142,8 @@ function validEmail(id) {
 					if (response === true) {
 						$("#loading").hide();
 						resolve(true);
-					} else {
+					}
+					else {
 						formStatus("#" + id + "-status", "Invalid email address!");
 						resolve(false);
 						$("#loading").hide();
@@ -157,8 +159,8 @@ function validEmail(id) {
 		}
 	});
 }
+// Function Marks Valid.
 
-// Function Marks Valid. 
 function marksValid(id) {
 	let input = document.getElementById(id).value.trim();
 	let lines = input.split('\n');
@@ -189,28 +191,27 @@ function marksValid(id) {
 		if (!pattern.test(cleanedLine)) {
 			isValid = false;
 			errorMsg += `Line ${i + 1} is invalid format \n`;
-		} else {
+		}
+		else {
 			cleanedLines.push(cleanedLine);
 		}
 	}
 
 	if (input === "") {
 		formStatus("#" + id + "-status", "Marks to be filled!");
-	} else if (isValid) {
+	}
+	else if (isValid) {
 		document.getElementById(id).value = cleanedLines.join('\n');
 		marksValidation = true;
-	} else {
+	}
+	else {
 		formStatus("#" + id + "-status", errorMsg);
 	}
 }
-
-
-
 // Fucntion Validate Form Submit.
 
 async function formSubmit(event) {
 	if (event) event.preventDefault();
-
 	validateName("first-name");
 	validateName("last-name");
 	imageValid("image-file");
@@ -230,9 +231,6 @@ async function formSubmit(event) {
 		form.submit();
 	}
 }
-
-
-
 // Function Form Status.
 
 function formStatus(id, message) {
@@ -242,8 +240,6 @@ function formStatus(id, message) {
 
 	});
 }
-
-
 // Function Hide Status.
 
 function hideStatus(id) {

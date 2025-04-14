@@ -8,18 +8,18 @@ $(document).ready(function () {
 			username: $("#username").val(),
 			password: $("#password").val()
 		};
-
 		$.ajax({
-			url: "./php/login.php",
+			url: "../php/login.php",
 			type: "POST",
 			data: { formData: JSON.stringify(formData) },
 			dataType: "json",
 			success: function (response) {
 				console.log(JSON.stringify(response));
 				if (response.status) {
-					window.location.href = "../../Assignment4/index.php";
+					window.location.href = "../Assignment4/index.php";
 					console.log("hello");
-				} else {
+				}
+				else {
 					console.log("Login Failed");
 					$(".status-label").css({
 						"opacity": "1"

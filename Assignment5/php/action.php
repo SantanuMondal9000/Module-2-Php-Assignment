@@ -1,99 +1,33 @@
 <?php
-include '../../php/userPermission.php';
-include '../../php/header.php';
-// Form Handling.
+
+  include '../../php/userPermission.php';
+  include '../../php/FormControler.php';
+  include '../../php/header.php';
+
+  if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
+    $formControler=new FormControler($_POST,$_FILES);
     
-if (isset($_POST['email'])) {
-    $fullName = $_POST['first-name'] . " " . $_POST['last-name'];
-    $marks = trim($_POST['marks-area']);
-    $imagePath = imageUpload();
-    $phoneNumber.=$_POST['phone-number'];
-    $email=$_POST['email'];
-    $emailNotValid="";
-    phoneNumberSet();
-    //emailValidate($email);
-    
-}
-
-// Function to handle file upload.
-
-function imageUpload()
-{
-    $targetDir = __DIR__ . "/../../image/";
-    $targetFile = $targetDir . basename($_FILES["image-file"]["name"]);
-
-    if (file_exists($targetFile)) {
-        return "../../image/" . basename($_FILES["image-file"]["name"]);
-    } 
-    else {
-        if (move_uploaded_file($_FILES["image-file"]["tmp_name"], $targetFile)) {
-            return "../../image/" . basename($_FILES["image-file"]["name"]);
-        } 
-        else {
-            return false;
-        }
-    }
-}
-//Function Phone Number Set.
-
-function phoneNumberSet(){
-    global $phoneNumber;
-    if(substr($phoneNumber,0,3)!="+91"){
-        $temp=$phoneNumber;
-        $phoneNumber="+91";
-        $phoneNumber.=$temp;
-    }
-}
-
-
-
+  }
 
 ?>
 <!DOCTYPE html>
 <html lang="en">
-<head>
+  <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../../css/style.css">
     <link rel="stylesheet" href="../css/style.css">
-    <title>Document</title>
-</head>
-<body>
+    <link rel="stylesheet" href="../../css/style.css">
+    <title>Assignment</title>
+  </head>
+  <body>
     <section class="content-part">
-            
-        <h1>Hello <?php echo htmlspecialchars($fullName); ?></h1>
-
-        <div class="image-container">
-            <img src="<?php echo htmlspecialchars($imagePath); ?>" alt="image" width="500" height="500">
-        </div>
-        <?php if (!empty($marks)) { ?>
-    <table>
-        <thead>
-            <tr>
-                <th>Subject</th>
-                <th>Marks</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php 
-            $marksLine = explode("\n", $marks);
-            foreach ($marksLine as $line) {
-                $marksPart = explode("|", $line);
-                if (count($marksPart) == 2) {
-                    ?>
-                    <tr>
-                        <td><?= htmlspecialchars(trim($marksPart[0])); ?></td>
-                        <td><?= htmlspecialchars(trim($marksPart[1])); ?></td>
-                    </tr>
-                    <?php
-                }
-            }
-            ?>
-        </tbody>
-    </table>
-<?php } ?>
-        <h1>Phone Number: <?= $phoneNumber ?></h1>
-        <h1>Email: <?= $emailNotValid == "" ? $email: $emailNotValid ?></h1>
+      <?php 
+      $formControler->assignment1Render();
+      $formControler->assignment2Render();
+      $formControler->assignment3Render();  
+      $formControler->assignment4Render(); 
+      $formControler->assignment5Render();  
+      ?>
     </section>
-</body>
+  </body>
 </html>

@@ -1,4 +1,5 @@
 // Variable.
+
 var firstNameValid = false;
 var lastNameValid = false;
 var nameLength = 30;
@@ -11,7 +12,6 @@ function updateFullname() {
 	let lastName = document.getElementById("last_name").value;
 	document.getElementById("full_name").value = firstName + " " + lastName;
 }
-
 // Validate Form.
 
 function validateName(id) {
@@ -27,7 +27,6 @@ function validateName(id) {
 		else if (!namePattern.test(firstName)) {
 			formStatus("#" + id + "-status", "first name must contain only alphabets.");
 			firstNameValid = false;
-
 		}
 		else if (firstName.length >= nameLength) {
 			formStatus("#" + id + "-status", "first name must below " + nameLength + " characters!");
@@ -60,12 +59,12 @@ function validateName(id) {
 // Function Image Valid.
 
 function imageValid(id) {
-
 	if ($("#" + id).get(0).files.length === 0) {
 		formStatus("#" + id + "-status", "image must be select!.");
 		imageSelect = false;
 		console.log("hello");
-	} else {
+	}
+	else {
 		imageSelect = true;
 	}
 }
@@ -82,17 +81,14 @@ function formSubmit() {
 		return false;
 	}
 }
-
 // Function Form Status.
 
 function formStatus(id, message) {
 	$(id).text(message).css({
 		"opacity": "1",
 		"text-transform": "capitalize"
-
 	});
 }
-
 // Function Hide Status.
 
 function hideStatus(id) {
@@ -100,4 +96,3 @@ function hideStatus(id) {
 		"opacity": "0"
 	});
 }
-
