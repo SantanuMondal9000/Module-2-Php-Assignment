@@ -37,14 +37,14 @@ class FormControler {
    * 
    * @var string 
    */
-  private $imagePath=null;
+  private $imagePath = null;
 
   /**
    * User Phone Number.
    * 
    * @var string 
    */
-  private $phoneNumber='';
+  private $phoneNumber = '';
 
   /**
    * User Email.
@@ -64,7 +64,7 @@ class FormControler {
     * Download File Path.
     * @var string 
     */
-    private $filePath= '';
+    private $filePath = '';
 
   /**
    * Summary of __construct
@@ -96,7 +96,6 @@ class FormControler {
     if(!is_dir($target_dir)) {
         mkdir($target_dir, 0755, true);
     }
-
     if(file_exists($target_file)) {
         $this->imagePath = "../../image/" . $file_name;
     } 
@@ -137,7 +136,7 @@ class FormControler {
    * 
    * @return void
    */
-  public function assignment1Render():void{
+  public function assignment1Render():void {
     ?><h1>Hello <?php echo htmlspecialchars($this->getFullName()); ?></h1><?php
   }
 
@@ -146,7 +145,7 @@ class FormControler {
    * 
    * @return void
    */
-  public function assignment2Render():void{
+  public function assignment2Render():void {
     ?>
       <div class="image-container">
         <?php if ($this->imagePath): ?>
@@ -163,7 +162,7 @@ class FormControler {
    * 
    * @return void
    */
-  public function assignment3Render():void{
+  public function assignment3Render():void {
     if(!empty($this->marks)) { ?>
       <table>
           <thead>
@@ -198,7 +197,7 @@ class FormControler {
    * 
    * @return void
    */
-  public function assignment4Render():void{
+  public function assignment4Render():void {
     ?><h1 class="phone-number">Phone Number:<? echo $this->phoneNumber?></h1><?php
   }
 
@@ -207,7 +206,7 @@ class FormControler {
    * 
    * @return void
    */
-  public function assignment5Render():void{
+  public function assignment5Render():void {
     ?><h1 class="email">Email:<? echo $this->email?></h1><?php
   }
 
@@ -216,7 +215,7 @@ class FormControler {
    * 
    * @return void
    */
-  public function assignment6Render():void{
+  public function assignment6Render():void {
     $this->generateDocument($this->getFullName(),$this->imagePath,$this->phoneNumber,$this->email, $this->marks);
     ?><a href="<?php echo $this->filePath ?>">Download Form Doc File</a><?php
       
@@ -236,7 +235,7 @@ class FormControler {
   public function generateDocument($full_name, $imagePath, $phoneNumber, $email,$marks)
     {
       try {
-        $marksLine  = explode("\n", $marks);
+        $marksLine = explode("\n", $marks);
         if (!file_exists($imagePath)) {
             throw new Exception("Image file not found: " . $imagePath);
         }
