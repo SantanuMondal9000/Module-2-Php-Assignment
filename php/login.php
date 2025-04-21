@@ -1,30 +1,31 @@
 <?php
-
   session_start();
+  require __DIR__ . '/../vendor/autoload.php';
+  $dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/../');
+  $dotenv->load();
+  $USERNAME = $_ENV['USERNAME'];
+  $PASSWORD = $_ENV['PASSWORD'];
 
-  $USERNAME="Santanu";
-  $PASSWORD="1234";
-
-  if(isset($_SESSION['username'])) {
+  if (isset($_SESSION['username'])) {
     header("Location: ../../index.php");
   }
 
-  if(isset($_POST['formData'])) {
-    $dataUser = json_decode($_POST['formData'], true);
+  if (isset($_POST['formData'])) {
+    $dataUser = json_decode($_POST['formData'], TRUE);
     
-    if($dataUser['username'] == $USERNAME && $dataUser['password'] == $PASSWORD) {
+    if ($dataUser['username'] == $USERNAME && $dataUser['password'] == $PASSWORD) {
       $_SESSION['username'] = $dataUser['username'];
     
-      echo json_encode(["status" => true]);
+      echo json_encode(["status" => TRUE]);
       session_set_cookie_params([
         'lifetime' => 0,
-        'secure' => true,    
-        'httponly' => true,     
+        'secure' => TRUE,    
+        'httponly' => TRUE,     
         'samesite' => 'Strict',
     ]);
   } 
   else {
-    echo json_encode(["status" => false]);
+    echo json_encode(["status" => FALSE]);
   }
   exit();
   }     

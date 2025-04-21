@@ -5,5 +5,4 @@ downloads/*
 !downloads/.gitkeep
 asset/*
 !asset/.gitkeep
-
-
+.env

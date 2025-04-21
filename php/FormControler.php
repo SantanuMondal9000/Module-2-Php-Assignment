@@ -6,8 +6,8 @@ use PhpOffice\PhpWord\PhpWord;
 use Exception;
 
 /**
- * FormControler Control Assignments Render.
- * 
+ * FormControler Class will fetch the data and file from Form.
+ * Make sperate render function to provide the html structure component. 
  */
 class FormControler {
 
@@ -37,7 +37,7 @@ class FormControler {
    * 
    * @var string 
    */
-  private $imagePath = null;
+  private $imagePath = NULL;
 
   /**
    * User Phone Number.
@@ -58,20 +58,20 @@ class FormControler {
    * 
    * @var string 
    */
-   private string $marks;
+   private $marks;
 
    /**
     * Download File Path.
+    *
     * @var string 
     */
     private $filePath = '';
 
   /**
-   * Summary of __construct
-   * The Form Data.
+   * The Constructor will initialize the form data and file data in class fields.
    * 
-   * @param array $post_data 
-   * @param array $file_data 
+   * @param array $post_data The html form data send by user.
+   * @param array $file_data The html form files send by user.
    */
   public function __construct(array $post_data, array $file_data) {
     $this->firstName = trim($post_data['first-name'] ?? '');
@@ -80,12 +80,13 @@ class FormControler {
     $this->phoneNumber = trim($post_data['phone-number'] ??'');
     $this->email = trim($post_data['email'] ??'');
     $this->imageUpload($file_data);
+   
   }
 
   /**
-   * Summary of imageUpload.
+   * This function will upload the image in backend set the image path in class image field.
    * 
-   * @param array $file_data
+   * @param array $file_data The Form file data send by user.
    * @return void
    */
   public function imageUpload(array $file_data) {
@@ -93,19 +94,19 @@ class FormControler {
     $file_name = basename($file_data["image-file"]["name"]);
     $target_file = $target_dir . $file_name;
 
-    if(!is_dir($target_dir)) {
-        mkdir($target_dir, 0755, true);
+    if (!is_dir($target_dir)) {
+        mkdir($target_dir, 0755, TRUE);
     }
-    if(file_exists($target_file)) {
+    if (file_exists($target_file)) {
         $this->imagePath = "../../image/" . $file_name;
     } 
-    elseif(move_uploaded_file($file_data["image-file"]["tmp_name"], $target_file)) {
+    elseif (move_uploaded_file($file_data["image-file"]["tmp_name"], $target_file)) {
         $this->imagePath = "../../image/" . $file_name;
     }
   }
 
   /**
-   * The user full name.
+   * The user full name will return by this function.
    * 
    * @return string 
    */
@@ -114,16 +115,16 @@ class FormControler {
   }
 
   /**
-   * The Image Path.
+   * The Image Path will be return by this function.
    * 
-   * @return string|null
+   * @return string|NULL
    */
   public function getImagePath(): ?string {
     return $this->imagePath;
   }
 
   /**
-   * User Marks.
+   * User Marks will return by this function.
    * 
    * @return string   
    */
@@ -132,7 +133,7 @@ class FormControler {
   }
 
   /**
-   * Summary of assignment1Render.
+   * This function will create the html content and render this in html.
    * 
    * @return void
    */
@@ -141,7 +142,7 @@ class FormControler {
   }
 
   /**
-   * Summary of assignment2Render.
+   * This function will create the html content and render this in html.
    * 
    * @return void
    */
@@ -149,7 +150,7 @@ class FormControler {
     ?>
       <div class="image-container">
         <?php if ($this->imagePath): ?>
-            <img src="<?php echo htmlspecialchars($this->imagePath); ?>" alt="Uploaded Image" width="500" height="500">
+            <img class="upload-image" src="<?php echo htmlspecialchars($this->imagePath); ?>" alt="Uploaded Image" width="" height="">
         <?php else: ?>
             <p>No image uploaded.</p>
         <?php endif; ?>
@@ -158,7 +159,7 @@ class FormControler {
   }
 
   /**
-   * Summary of assignment3Render.
+   * This function will create the html content and render this in html.
    * 
    * @return void
    */
@@ -179,8 +180,8 @@ class FormControler {
                 if (count($marksPart) == 2) {
                   ?>
                   <tr>
-                    <td><?php htmlspecialchars(trim($marksPart[0])); ?></td>
-                    <td><?php htmlspecialchars(trim($marksPart[1])); ?></td>
+                    <td><?php echo htmlspecialchars(trim($marksPart[0])); ?></td>
+                    <td><?php echo htmlspecialchars(trim($marksPart[1])); ?></td>       
                   </tr>
                   <?php
                 }
@@ -190,10 +191,11 @@ class FormControler {
       </table>
       <?php 
     }
+    
   }
 
   /**
-   * Summary of assignment4Render.
+   * This function will create the html content and render this in html.
    * 
    * @return void
    */
@@ -202,7 +204,7 @@ class FormControler {
   }
 
   /**
-   * Summary of assignment5Render.
+   * This function will create the html content and render this in html.
    * 
    * @return void
    */
@@ -211,7 +213,7 @@ class FormControler {
   }
 
   /**
-   * Summary of assignment6Render.
+   * This function will create the html content and render this in html.
    * 
    * @return void
    */
@@ -222,14 +224,15 @@ class FormControler {
   }
 
   /**
-   * Summary of generateDocument.
+   * This function will fetch all the data by parameter and make a DOC file save in backend folder.
+   * One download link will provide to download the DOC file.
    * 
-   * @param string $full_name
-   * @param string $imagePath
-   * @param string $phoneNumber
-   * @param string $email
-   * @param string $marks
-   * @throws \Exception
+   * @param string $full_name   The full name of the user.
+   * @param string $imagePath   The path to the user's image file.
+   * @param string $phoneNumber The user's phone number.
+   * @param string $email       The user's email address.
+   * @param string $marks       The user's marks or score.
+   * @throws \Exception         Exception If an error occurs during the file generation process.
    * @return void
    */
   public function generateDocument($full_name, $imagePath, $phoneNumber, $email,$marks)
@@ -240,12 +243,15 @@ class FormControler {
             throw new Exception("Image file not found: " . $imagePath);
         }
 
+        //Make the Object and create the section.
         $phpWord = new PhpWord();
         $section = $phpWord->addSection();
         $textAlignCenter = [
             'alignment'   => \PhpOffice\PhpWord\SimpleType\Jc::CENTER
         ];
-        $section->addText("Hello $full_name", ['bold' => true, 'size' => 24], $textAlignCenter);
+
+        //Add the content in Doc file.
+        $section->addText("Hello $full_name", ['bold' => TRUE, 'size' => 24], $textAlignCenter);
         $section->addTextBreak(1);
         $section->addImage($imagePath, [
           'width' => 300,
@@ -259,13 +265,11 @@ class FormControler {
           'cellMargin'  => 100,
           'alignment'   => \PhpOffice\PhpWord\SimpleType\JcTable::CENTER,
         ];
-
         $headerStyle = [
           'color'   => 'FFFFFF',
-          'bold'    => true,
+          'bold'    => TRUE,
           'size'    => 20,
         ];
-
         $textStyle = ['size' => 18, 'color' => '000000'];
         $table = $section->addTable($tableStyle);
         $table->addRow();
@@ -278,13 +282,14 @@ class FormControler {
           $table->addCell(3000)->addText(trim($marksPart[1]), $textStyle);
         }
         $section->addTextBreak(1);
-        $section->addText("Phone Number: $phoneNumber", ['bold' => true, 'size' => 24], $textAlignCenter);
+        $section->addText("Phone Number: $phoneNumber", ['bold' => TRUE, 'size' => 24], $textAlignCenter);
         $section->addTextBreak(1);
-        $section->addText("Email: $email", ['bold' => true, 'size' => 24], $textAlignCenter);
+        $section->addText("Email: $email", ['bold' => TRUE, 'size' => 24], $textAlignCenter);
         $section->addTextBreak(1);
+
+        //Set the directory path and save the Doc in directory.
         $fileName =  '../../downloads/' . $full_name . date("d-m-Y_H-i-s") . '.docx';
         $this->filePath = $fileName;
-
         if (!file_exists($fileName)) {
             $phpWord->save($fileName, 'Word2007');
         } 

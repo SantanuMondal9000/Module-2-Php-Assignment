@@ -67,3 +67,13 @@ h1 {
 .menu a:hover {
 	background-color: #cccccc;
 }
+
+.image-container {
+	text-align: center;
+}
+
+.upload-image {
+	width: 600px;
+	height: 600px;
+	text-align: center;
+}

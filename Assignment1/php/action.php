@@ -5,7 +5,7 @@
   include '../../php/header.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
-    $formControler = new FormControler($_POST,$_FILES);
+    $formControler = new FormControler($_POST, $_FILES);
 }
 
 ?>

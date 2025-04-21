@@ -4,7 +4,7 @@
  include '../../php/header.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
-    $formControler=new FormControler($_POST,$_FILES);
+    $formControler=new FormControler($_POST, $_FILES);
 }
 
 ?>
@@ -13,7 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../../css/formpage.css">
     <link rel="stylesheet" href="../../css/style.css">
     <title>Assignment</title>
   </head>

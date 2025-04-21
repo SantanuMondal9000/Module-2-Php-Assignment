@@ -1,5 +1,4 @@
 //Function To Login.
-
 $(document).ready(function () {
 	$("#loginForm").submit(function (event) {
 		event.preventDefault();
@@ -13,11 +12,11 @@ $(document).ready(function () {
 			type: "POST",
 			data: { formData: JSON.stringify(formData) },
 			dataType: "json",
-			success: function (response) {
+			success: function (response) { 
 				console.log(JSON.stringify(response));
 				if (response.status) {
-					window.location.href = "../Assignment4/index.php";
-					console.log("hello");
+					window.location.href="/Assignment4/index.php";
+					console.log("hello world");
 				}
 				else {
 					console.log("Login Failed");
@@ -35,7 +34,6 @@ $(document).ready(function () {
 });
 
 //Function Hide Error.
-
 function hideStatus() {
 	$(".status-label").css({
 		"opacity": "0"

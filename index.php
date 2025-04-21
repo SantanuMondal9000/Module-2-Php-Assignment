@@ -4,7 +4,7 @@
 	if (isset($_GET['q'])) {
 		$q = $_GET['q'];
 		if (isset($_SESSION['username'])) {
-				if($q<7) {
+				if ($q<7) {
 					header("Location: Assignment$q/");
 					exit();
 				}

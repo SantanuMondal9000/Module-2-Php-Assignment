@@ -10,7 +10,7 @@
 	<head>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<link rel="stylesheet" href="css/style.css">
+		<link rel="stylesheet" href="../../css/formpage.css">
 		<title>Assignment 4</title>
 	</head>
 
@@ -20,7 +20,7 @@
 			<div class="container">
 				<div class="form-wrapper">
 					<div class="form-container">
-						<form action="php/action.php" method="post" name="my-form" onsubmit="return formSubmit()"
+						<form action="php/action.php" method="post" name="my-form" onsubmit="return assignment4FormSubmit()"
 							enctype="multipart/form-data">
 							<label for="first_name">First Name</label>
 							<input type="text" id="first_name" name="first-name" placeholder="First name"
@@ -54,6 +54,6 @@
 
 	</body>
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-	<script src="js/assignment4.js"></script>
+	<script src="../js/assignments.js"></script>
 
 </html>

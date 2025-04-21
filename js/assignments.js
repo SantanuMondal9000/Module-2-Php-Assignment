@@ -9,15 +9,14 @@ var emailValid = false;
 var marksValidation = false;
 
 // Update the Full name.
-
 function updateFullname() {
   let firstName = document.getElementById("first_name").value;
   let lastName = document.getElementById("last_name").value;
   document.getElementById("full_name").value = firstName + " " + lastName;
 
 }
-// Validate Form.
 
+// Validate Form.
 function validateName(id) {
   updateFullname();
   let lastName = document.forms["my-form"]["last-name"].value;
@@ -61,8 +60,20 @@ function validateName(id) {
     }
   }
 }
-// Function Image Valid.
 
+//Assignment 1 Form Submit.
+function assignment1FormSubmit() {
+	validateName("first-name");
+	validateName("last-name");
+	if (firstNameValid && lastNameValid) {
+		return true;
+	}
+	else {
+		return false;
+	}
+}
+
+// Function Image Valid.
 function imageValid(id) {
   var fileInput = document.getElementById("image-file");
   var filePath = fileInput.value;
@@ -81,8 +92,21 @@ function imageValid(id) {
     imageSelect = true;
   }
 }
-// Validate Phone Number.
 
+// Fucntion Assignment 2 Form Submit.
+function assignment2FormSubmit() {
+	validateName("first-name");
+	validateName("last-name");
+	imageValid("image-file");
+	if (firstNameValid && lastNameValid && imageSelect) {
+		return true;
+	}
+	else {
+		return false;
+	}
+}
+
+// Validate Phone Number.
 function validatePhone(id) {
   let phonePattern = /^[6-9]\d{9}$/;
   let phoneNumber = $("#" + id).val().trim();
@@ -114,49 +138,8 @@ function validatePhone(id) {
     }
   }
 }
-// Function Valid Email.
 
-
-function validEmail(id) {
-  return new Promise(function (resolve, reject) {
-    let email = $("#" + id).val().trim();
-    let emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-
-    if (!emailPattern.test(email)) {
-      formStatus("#" + id + "-status", "Invalid Syntax !");
-      resolve(false);
-    } else {
-      hideStatus("#" + id + "-status");
-      $("#loading").show();
-
-      $.ajax({
-        url: "../../Assignment5/php/emailValidator.php",
-        type: "POST",
-        data: { email: email },
-        dataType: "json",
-        success: function (response) {
-          console.log("Server check:", response);
-          if (response === true) {
-            resolve(true);
-            $("#loading").hide();
-          } else {
-            formStatus("#" + id + "-status", "Invalid email address!");
-            resolve(false);
-            $("#loading").hide();
-          }
-        },
-        error: function (xhr, status, error) {
-          console.log("AJAX Error: " + status + " - " + error);
-          formStatus("#" + id + "-status", "Failed!");
-          $("#loading").hide();
-          resolve(false);
-        }
-      });
-    }
-  });
-}
 // Function Marks Valid. 
-
 function marksValid(id) {
   let input = document.getElementById(id).value.trim();
   let lines = input.split('\n');
@@ -201,8 +184,78 @@ function marksValid(id) {
     formStatus("#" + id + "-status", errorMsg);
   }
 }
-// Fucntion Validate Form Submit.
 
+// Fucntion Assignment 3 Form Submit.
+function assignment3FormSubmit() {
+	validateName("first-name");
+	validateName("last-name");
+	imageValid("image-file");
+	marksValid("marks-area");
+	if (firstNameValid && lastNameValid && imageSelect && marksValidation) {
+		return true;
+	}
+	else {
+		return false;
+	}
+}
+
+// Fucntion Validate Form Submit.
+function assignment4FormSubmit() {
+	validateName("first-name");
+	validateName("last-name");
+	imageValid("image-file");
+	marksValid("marks-area");
+	validatePhone("phone-number");
+	console.log(phoneNumberValid);
+	if (firstNameValid && lastNameValid && imageSelect && marksValidation && phoneNumberValid) {
+		return true;
+	}
+	else {
+		return false;
+	}
+}
+
+// Function Valid Email.
+function validEmail(id) {
+  return new Promise(function (resolve, reject) {
+    let email = $("#" + id).val().trim();
+    let emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
+    if (!emailPattern.test(email)) {
+      formStatus("#" + id + "-status", "Invalid Syntax !");
+      resolve(false);
+    } else {
+      hideStatus("#" + id + "-status");
+      $("#loading").show();
+
+      $.ajax({
+        url: "../../Assignment5/php/emailValidator.php",
+        type: "POST",
+        data: { email: email },
+        dataType: "json",
+        success: function (response) {
+          console.log("Server check:", response);
+          if (response === true) {
+            resolve(true);
+            $("#loading").hide();
+          } else {
+            formStatus("#" + id + "-status", "Invalid email address!");
+            resolve(false);
+            $("#loading").hide();
+          }
+        },
+        error: function (xhr, status, error) {
+          console.log("AJAX Error: " + status + " - " + error);
+          formStatus("#" + id + "-status", "Failed!");
+          $("#loading").hide();
+          resolve(false);
+        }
+      });
+    }
+  });
+}
+
+// Fucntion Validate Form Submit.
 async function formSubmit(event) {
   if (event) event.preventDefault();
 
@@ -224,8 +277,8 @@ async function formSubmit(event) {
     form.submit();
   }
 }
-// Function Form Status.
 
+// Function Form Status.
 function formStatus(id, message) {
   $(id).text(message).css({
     "opacity": "1",
@@ -233,8 +286,8 @@ function formStatus(id, message) {
 
   });
 }
-// Function Hide Status.
 
+// Function Hide Status.
 function hideStatus(id) {
   $(id).css({
     "opacity": "0"
