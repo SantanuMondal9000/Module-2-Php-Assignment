@@ -1,0 +1,8 @@
+/vendor/
+image/*
+!image/.gitkeep
+downloads/*
+!downloads/.gitkeep
+asset/*
+!asset/.gitkeep
+.env
